@@ -66,15 +66,33 @@ namespace MyOwnWebServer
                 formattedMsg = "[RESPONSE]: ";
                 // #### Need to look at http header content ####
             }
-            else if(status == "STOP")
+            else
             {
-                formattedMsg = "[SERVER STOPPED]";
+                formattedMsg = FormatForLog("Unknown Operation", status);
+            }
+
+            return formattedMsg;
+        }
+
+        static public string FormatForLog(string msg, string status)
+        {
+            string formattedMsg = "";
+            if (status == "STOP")
+            {
+                formattedMsg = "[SERVER STOPPED]: ";
+                formattedMsg += msg;
+            }
+            else if(status == "EXCEPTION")
+            {
+                formattedMsg = "[EXCEPTION]: ";
+                formattedMsg += msg;
             }
             else
             {
-                formattedMsg = "[EXCEPTION]: ";
+                formattedMsg = "[UNKNOWN]: ";
+                formattedMsg += status + " - ";
+                formattedMsg += msg;
             }
-
             return formattedMsg;
         }
     }

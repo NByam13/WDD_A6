@@ -50,7 +50,7 @@ namespace MyOwnWebServer
             if(args.Length != kReqArgNum) // if the return code of the check args method is not 0, that means there are more or less
             {                           // than 3 args, direct the user to the help feature and exit with -1.
 
-                Logger.Log("Unable to start server due to invalid argument count."); //#### Sean's spec####
+                Logger.Log(Logger.FormatForLog("Server Unable to Start, Invalid Argument Count", "EXCEPTION")); //#### Sean's spec####
                 Environment.Exit(kBadArgCount);
             }
             else // everything is good to go here, we have the right number of args so far, just need to check them
@@ -59,18 +59,19 @@ namespace MyOwnWebServer
                 if(argArray.Length <= kMaxUnkownArgs) // if the amount of args that comes back is 3 or less, we know one or more was not
                 {                                     // recognized as valid
 
-                    Logger.Log("Unknown arguments used to start server"); // ####Sean's Spec!!! ####
+                    Logger.Log(Logger.FormatForLog("Unknown Arguments Gathered From Cmd Line","EXCEPTION"));
                     Environment.Exit(kUnknownArg); // exit with the proper error code
                 }
                 else if(argArray.Length == kMaxSplitArgs) // check to make sure we have 6 elements after splitting, if we don't 
                 {                                         // then something went wrong
                     WebServer Server = new WebServer(argArray);
+                    Logger.Log(Logger.FormatForLog(argArray, "START"));
                     Server.StartServer();
-                    Logger.Log("Server Shut Down"); //#### Log must be to Sean's spec ####
+                    Logger.Log(Logger.FormatForLog("Server Shut Down","STOP"));
                 }
                 else
                 {
-                    Logger.Log("Something went wrong. Please try starting the server again."); //#### Sean's Spec!!##
+                    Logger.Log(Logger.FormatForLog("The Number of Arguments Was Invalid","Argument Count Error"));
                     Environment.Exit(kProblem);
                 }
             }
@@ -89,7 +90,6 @@ namespace MyOwnWebServer
         {
             TcpListener listener = new TcpListener(ServerIP, Port); // create a listener on the given IP and Port
             listener.Start(); // start the listener
-            Logger.Log("server started");
             while(run) // wait for incoming connection requests until the run boolean is set to false. 
             {
                 if(!listener.Pending()) // if there is not a connection pending continue to next iteration, therefore no blocking occurs
