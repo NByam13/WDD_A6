@@ -1,0 +1,6 @@
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\MyOwnWebServer.exe.config
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\MyOwnWebServer.exe
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\MyOwnWebServer.pdb
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\obj\Debug\MyOwnWebServer.csproj.CoreCompileInputs.cache
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\obj\Debug\MyOwnWebServer.exe
+C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\obj\Debug\MyOwnWebServer.pdb
