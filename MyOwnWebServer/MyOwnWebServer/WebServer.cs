@@ -47,14 +47,10 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         static void Main(string[] args)
         {
-            if(Help(args)) // if help is the first arg, then ignore any others, and print instructions to the cmd prompt
-            {
-                Environment.Exit(kHelpCode); // exit after printing instruction.
-            }
-
             if(args.Length != kReqArgNum) // if the return code of the check args method is not 0, that means there are more or less
             {                           // than 3 args, direct the user to the help feature and exit with -1.
-                Console.WriteLine("Incorrect Amount of Arguments: Try 'help' for instruction to start the Web Server.");
+
+                Logger.Log("Unable to start server due to invalid argument count."); //#### Sean's spec####
                 Environment.Exit(kBadArgCount);
             }
             else // everything is good to go here, we have the right number of args so far, just need to check them
@@ -62,22 +58,19 @@ namespace MyOwnWebServer
                 string[] argArray = ParseArgs(args); // check the args and split them with parse
                 if(argArray.Length <= kMaxUnkownArgs) // if the amount of args that comes back is 3 or less, we know one or more was not
                 {                                     // recognized as valid
-                    foreach(string arg in argArray) // iterate through the error array, print the unknown commands to the screen
-                    {
-                        Console.WriteLine("Unknown Argument: {0}", arg);
-                    }
-                    Console.WriteLine("\nTry 'help' for instruction to start the Web Server.\n"); // recommend the help command
+
+                    Logger.Log("Unknown arguments used to start server"); // ####Sean's Spec!!! ####
                     Environment.Exit(kUnknownArg); // exit with the proper error code
                 }
                 else if(argArray.Length == kMaxSplitArgs) // check to make sure we have 6 elements after splitting, if we don't 
                 {                                         // then something went wrong
                     WebServer Server = new WebServer(argArray);
                     Server.StartServer();
-                    Console.WriteLine("Server Shut Down.\n");
+                    Logger.Log("Server Shut Down"); //#### Log must be to Sean's spec ####
                 }
                 else
                 {
-                    Console.WriteLine("\nSomething went wrong. Please try starting the server again.\n");
+                    Logger.Log("Something went wrong. Please try starting the server again."); //#### Sean's Spec!!##
                     Environment.Exit(kProblem);
                 }
             }
@@ -96,7 +89,7 @@ namespace MyOwnWebServer
         {
             TcpListener listener = new TcpListener(ServerIP, Port); // create a listener on the given IP and Port
             listener.Start(); // start the listener
-
+            Logger.Log("server started");
             while(run) // wait for incoming connection requests until the run boolean is set to false. 
             {
                 if(!listener.Pending()) // if there is not a connection pending continue to next iteration, therefore no blocking occurs
@@ -179,29 +172,6 @@ namespace MyOwnWebServer
                 count++;
             }
             return argArray; // return key value array
-        }
-
-
-        /////////////////////////////////////////
-        // Method       : Help
-        // Description  : A method that checks to see if the user has asked for help regarding starting the web server.
-        //              : prints a list of key-value pairs that are required to start the server. It will only accept the help arg
-        //              : if it is the first and only argument. Having it amongst other arguments will not work.
-        // Parameters   : string[] args : the cmd line arg list
-        // Returns      : true : if help was given
-        //              : false : if help was not given
-        /////////////////////////////////////////
-        static public bool Help(string[] args)
-        {
-            if(args[0].ToLower() == "help" && args.Length == 1) // help arg only accepted when it is the first and only argument
-            {
-                Console.WriteLine("|--- 3 Arguments are necessary to start the Web Server ---|\n");
-                Console.WriteLine("1. -webRoot=<path/to/web/data>");
-                Console.WriteLine("2. -webIP=<Starting IP of Server>");
-                Console.WriteLine("3. -webPort=<Starting Port of Server>");
-                return true;
-            }
-            else { return false; }
         }
 
 
