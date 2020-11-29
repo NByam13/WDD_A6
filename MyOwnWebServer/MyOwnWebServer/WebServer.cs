@@ -121,7 +121,7 @@ namespace MyOwnWebServer
             string data = Receive(stream);
             bool validation;
 
-            validation = FileHandler.IsValidPath(data);
+            validation = HttpHandler.ValidateRequest(data);
 
             //if(validation==true)
             //{
