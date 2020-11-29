@@ -120,7 +120,6 @@ namespace MyOwnWebServer
             NetworkStream stream = client.GetStream();
             string data = Receive(stream);
             bool validation;
-            int i;
 
             validation = FileHandler.IsValidPath(data);
 
@@ -148,7 +147,7 @@ namespace MyOwnWebServer
 
             numBytes = stream.Read(bytes, 0, bytes.Length);
             data += Encoding.ASCII.GetString(bytes, 0, numBytes);
-
+            stream.Flush();
             return data;
         }
 

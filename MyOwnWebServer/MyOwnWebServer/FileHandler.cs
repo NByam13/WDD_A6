@@ -11,7 +11,7 @@ namespace MyOwnWebServer
 {
     static public class FileHandler
     {
-        static public void CreateFile(string path)
+        static public void CreateFile(string path) // only really used for the logger
         {
             if(!File.Exists(path))
             {
