@@ -21,8 +21,15 @@ namespace MyOwnWebServer
             const string ServerErr = "500 Internal Server Error";
             const string NotImplemented = "501 Not Implemented";
             const string VersionErr = "505 HTTP Version Not Supported";
-
         }
+
+        public struct ContentType
+        {
+            const string Html = "text/html";
+            const string Image = "";
+        }
+
+        public const string version = "HTTP/1.1";
 
         public static bool ValidateRequest(string data)
         {
@@ -61,6 +68,7 @@ namespace MyOwnWebServer
 
         public static string BuildResponse()
         {
+            StringBuilder builder = new StringBuilder();
 
         }
     }
