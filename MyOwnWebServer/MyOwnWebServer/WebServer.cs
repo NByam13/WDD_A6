@@ -116,7 +116,52 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         public void HandleClient(TcpClient client)
         {
-            //
+            // Buffer for reading data
+            byte[] bytes = new byte[4096];
+            string data = null;
+            bool validation;
+            data = null;
+
+            // Get a stream object for reading and writing
+            NetworkStream stream = client.GetStream();
+
+            int i;
+
+            // Loop to receive all the data sent by the client.
+            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+            {
+
+                // Translate data bytes to a ASCII string.
+                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                validation = FileHandler.IsValidPath(data);
+
+                //if(validation==true)
+                //{
+                //    //send msg back with what they wanted
+                //}
+                //else
+                //{
+                //    //do nothing or say invalid?
+                //}
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+                //do something with input recieved by user
+            }
+
+            // Shutdown and end connection
+            client.Close();
+        }
+
+        public string Receive(NetworkStream stream)
+        {
+            // Buffer for reading data
+            byte[] bytes = new byte[4096];
+            int numBytes = 0;
+            string data = "";
+
+            numBytes = stream.Read(bytes, 0, bytes.Length);
+            data += Encoding.ASCII.GetString(bytes, 0, numBytes);
+
+            return data;
         }
 
 
