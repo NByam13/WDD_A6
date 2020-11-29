@@ -116,7 +116,9 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         public void HandleClient(TcpClient client)
         {
-            //
+            // get incoming communication
+            var stream = client.GetStream();
+
         }
 
 
