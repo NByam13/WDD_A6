@@ -122,16 +122,17 @@ namespace MyOwnWebServer
             Logger.Log(Logger.FormatForLog(data, "RECEIVE"));
             bool validation;
             string path;
-
+            byte[] returnMsg = new byte[1024];
+            
             validation = HttpHandler.ValidateRequest(data, out path);
 
             if(validation)
             {
                 string[] resource = new string[1024];
-                resource = FileHandler.GetResource(path);
+                resource = FileHandler.GetTextResource(path);
                 if(resource == null)
                 {
-                    // Pick the correct code to send back
+                    // Pick the correct code
                 }
                 else
                 {
@@ -142,7 +143,7 @@ namespace MyOwnWebServer
             {
                 // pick appropriate error code
             }
-
+            Send(stream, returnMsg);
             // Shutdown and end connection
             client.Close();
         }
@@ -163,7 +164,15 @@ namespace MyOwnWebServer
 
         public void Send(NetworkStream stream, byte[] msg)
         {
-
+            try
+            {
+                stream.Write(msg, 0, msg.Length);
+                stream.Flush();
+            }
+            catch(Exception e)
+            {
+                Logger.Log(Logger.FormatForLog(e.Message, "EXCEPTION"));
+            }
         }
 
 

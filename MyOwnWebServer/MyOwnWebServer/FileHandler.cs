@@ -47,7 +47,7 @@ namespace MyOwnWebServer
         }
 
 
-        static public string[] GetResource(string path)
+        static public string[] GetTextResource(string path)
         {
             string[] resource = new string[1024];
 
