@@ -123,23 +123,14 @@ namespace MyOwnWebServer
             Logger.Log(Logger.FormatForLog(data, "RECEIVE"));
             bool validation;
             string path;
-            byte[] returnMsg = new byte[1024];
+            byte[] returnMsg = new byte[1000096];
             
             validation = HttpHandler.ValidateRequest(data, out path);
 
             if(validation)
             {
-                string[] resource = new string[1024];
-                resource = FileHandler.GetTextResource(path);
-                if(resource == null)
-                {
-                    // Pick the correct code
-                    Codes.currentCode = HttpHandler.HTTPCodes.ServerErr;
-                }
-                else
-                {
-                    // convert resource to appropriate byte form and get correct code.
-                }
+                
+               
             }
             else
             {
