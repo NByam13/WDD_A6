@@ -24,6 +24,8 @@ namespace MyOwnWebServer
             const string ServerErr = "500 Internal Server Error";
             const string NotImplemented = "501 Not Implemented";
             const string VersionErr = "505 HTTP Version Not Supported";
+
+            string currentCode;
         }
 
         public struct ContentType
@@ -36,6 +38,11 @@ namespace MyOwnWebServer
 
         public static bool ValidateRequest(string data, out string resource)
         {
+            if(data == null)
+            {
+                resource = null;
+                return false;
+            }
             if (data.StartsWith("GET"))
             {
                 // this means it is a GET request

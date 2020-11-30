@@ -154,10 +154,18 @@ namespace MyOwnWebServer
             byte[] bytes = new byte[4096];
             int numBytes = 0;
             string data = "";
-
-            numBytes = stream.Read(bytes, 0, bytes.Length);
-            data += Encoding.ASCII.GetString(bytes, 0, numBytes);
-            stream.Flush();
+            try
+            {
+                numBytes = stream.Read(bytes, 0, bytes.Length);
+                data += Encoding.ASCII.GetString(bytes, 0, numBytes);
+                stream.Flush();
+            }
+            catch(Exception e)
+            {
+                Logger.Log(Logger.FormatForLog(e.Message, "EXCEPTION"));
+                return null;
+            }
+            
             return data;
         }
 
