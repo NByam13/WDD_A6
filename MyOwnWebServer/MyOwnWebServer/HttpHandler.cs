@@ -91,7 +91,7 @@ namespace MyOwnWebServer
 
         public static byte[] Converter(string path)
         {
-            byte[] bytes = new byte[4096];
+            byte[] bytes = new byte[1000096];
             //if .gif
             if (path.EndsWith(".gif"))
             {
