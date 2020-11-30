@@ -47,13 +47,13 @@ namespace MyOwnWebServer
         }
 
 
-        static public string[] GetTextResource(string path)
+        static public string GetTextResource(string path)
         {
-            string[] resource;
+            string resource;
 
             try
             {
-                resource = File.ReadAllLines(path);
+                resource = File.ReadAllText(path);
             }
             catch(Exception e)
             {

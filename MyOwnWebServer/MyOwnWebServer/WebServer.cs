@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MyOwnWebServer
 {
@@ -123,19 +124,28 @@ namespace MyOwnWebServer
             Logger.Log(Logger.FormatForLog(data, "RECEIVE"));
             bool validation;
             string path;
+            string mime;
             byte[] returnMsg = new byte[1000096];
             
-            validation = HttpHandler.ValidateRequest(data, out path);
+            validation = HttpHandler.ValidateRequest(data, out path, out Codes.currentCode);
 
             if(validation)
             {
-                
-               
+                DataPath += path;
+                if(FileHandler.IsValidPath(DataPath))
+                {
+                    mime = MimeMapping.GetMimeMapping(DataPath);
+                }
+                else
+                {
+                    Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
+                }
             }
             else
             {
                 // pick appropriate error code
             }
+            returnMsg = HttpHandler.BuildResponse(mime, Codes.currentCode, )
             Send(stream, returnMsg);
             // Shutdown and end connection
             stream.Close();

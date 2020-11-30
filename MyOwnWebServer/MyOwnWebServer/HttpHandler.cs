@@ -31,11 +31,12 @@ namespace MyOwnWebServer
 
         public const string version = "HTTP/1.1";
 
-        public static bool ValidateRequest(string data, out string resource)
+        public static bool ValidateRequest(string data, out string resource, out string code)
         {
             if(data == null)
             {
                 resource = null;
+                code = HTTPCodes.BadRequest;
                 return false;
             }
             if (data.StartsWith("GET")) // this means it is a GET request
@@ -44,24 +45,15 @@ namespace MyOwnWebServer
                 {
                     string[] splitData = data.Split(' ');
                     string path = splitData[1];
-                    // Also need to check the last element is http/1.1 \r\n
-                    if (FileHandler.IsValidPath(path))
-                    {
-                        // is a valid header
-                        resource = path;
-                        return true;
-                    }
-                    else
-                    {
-                        // is not a valid path
-                        resource = null;
-                        return false;
-                    }
+                    resource = path;
+                    code = HTTPCodes.OK;
+                    return true;
                 }
                 else
                 {
                     // not a valid header if it does not have this
                     resource = null;
+                    code = HTTPCodes.VersionErr;
                     return false;
                 }
             }
@@ -69,6 +61,7 @@ namespace MyOwnWebServer
             {
                 // we don't support post
                 resource = null;
+                code = HTTPCodes.NotAllowed;
                 return false;
             }
             
@@ -76,7 +69,7 @@ namespace MyOwnWebServer
 
 
 
-        public static string BuildResponse(string mime, string code, int length)
+        public static byte[] BuildResponse(string mime, string code, int length)
         {
             string time = DateTime.UtcNow.ToLongDateString();
 
@@ -88,7 +81,7 @@ namespace MyOwnWebServer
             builder.AppendFormat("Content-Length: {0}\r\n", length);
             builder.Append("\r\n");
 
-            return builder.ToString();
+            return Encoding.ASCII.GetBytes(builder.ToString());
         }
 
 
@@ -113,14 +106,15 @@ namespace MyOwnWebServer
                 bytes = (byte[])imageC.ConvertTo(specifiedImage, typeof(byte[]));
 
             }
-            //if html
-            else if (path.EndsWith(".html"))
+            //if html or text
+            else if (path.EndsWith(".html") || path.EndsWith(".txt"))
             {
-                string[] httpString = FileHandler.GetTextResource(path);
-                for(int i=0; i < httpString.Length;i++)
-                {
-                    bytes[i] = byte.Parse(httpString[i]);
-                }
+                string htmlString = FileHandler.GetTextResource(path);
+                bytes = Encoding.ASCII.GetBytes(htmlString);
+            }
+            else
+            {
+                bytes = null;
             }
             //return the value in byte array
             return bytes;
