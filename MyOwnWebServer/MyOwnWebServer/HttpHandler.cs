@@ -100,7 +100,7 @@ namespace MyOwnWebServer
 
         public static byte[] Converter(string path)
         {
-            byte[] bytes = new byte[4096];
+            byte[] bytes = new byte[1000096];
             //if .gif
             if (path.EndsWith(".gif"))
             {
@@ -122,7 +122,11 @@ namespace MyOwnWebServer
             //if html
             else if (path.EndsWith(".html"))
             {
-
+                string[] httpString = FileHandler.GetTextResource(path);
+                for(int i=0; i < httpString.Length;i++)
+                {
+                    bytes[i] = byte.Parse(httpString[i]);
+                }
             }
             //return the value in byte array
             return bytes;
