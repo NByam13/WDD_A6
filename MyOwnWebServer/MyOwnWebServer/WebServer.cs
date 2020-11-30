@@ -47,7 +47,7 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         static void Main(string[] args)
         {
-            if(args.Length != kReqArgNum) // if the return code of the check args method is not 0, that means there are more or less
+            if (args.Length != kReqArgNum) // if the return code of the check args method is not 0, that means there are more or less
             {                           // than 3 args, direct the user to the help feature and exit with -1.
 
                 Logger.Log(Logger.FormatForLog("Server Unable to Start, Invalid Argument Count", "EXCEPTION")); //#### Sean's spec####
@@ -116,6 +116,7 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         public void HandleClient(TcpClient client)
         {
+            HttpHandler.HTTPCodes Codes;
             // Get a stream object for reading and writing
             NetworkStream stream = client.GetStream();
             string data = Receive(stream);
@@ -133,6 +134,7 @@ namespace MyOwnWebServer
                 if(resource == null)
                 {
                     // Pick the correct code
+                    Codes.currentCode = HttpHandler.HTTPCodes.ServerErr;
                 }
                 else
                 {
@@ -145,6 +147,7 @@ namespace MyOwnWebServer
             }
             Send(stream, returnMsg);
             // Shutdown and end connection
+            stream.Close();
             client.Close();
         }
 

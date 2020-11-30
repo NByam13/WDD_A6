@@ -13,19 +13,19 @@ namespace MyOwnWebServer
     {
         public struct HTTPCodes
         {
-            const string OK = "200 OK";
-            const string NoContent = "204 No Content";
-            const string BadRequest = "400 Bad Request";
-            const string Forbidden = "403 Forbidden";
-            const string NotFound = "404 Not Found";
-            const string NotAllowed = "405 Method Not Allowed";
-            const string TeaPot = "418 I'm a Teapot";
-            const string TooMany = "429 Too Many Requests";
-            const string ServerErr = "500 Internal Server Error";
-            const string NotImplemented = "501 Not Implemented";
-            const string VersionErr = "505 HTTP Version Not Supported";
+            public const string OK = "200 OK";
+            public const string NoContent = "204 No Content";
+            public const string BadRequest = "400 Bad Request";
+            public const string Forbidden = "403 Forbidden";
+            public const string NotFound = "404 Not Found";
+            public const string NotAllowed = "405 Method Not Allowed";
+            public const string TeaPot = "418 I'm a Teapot";
+            public const string TooMany = "429 Too Many Requests";
+            public const string ServerErr = "500 Internal Server Error";
+            public const string NotImplemented = "501 Not Implemented";
+            public const string VersionErr = "505 HTTP Version Not Supported";
 
-            string currentCode;
+            public string currentCode;
         }
 
         public struct ContentType
@@ -82,10 +82,19 @@ namespace MyOwnWebServer
 
 
 
-        public static string BuildResponse()
+        public static string BuildResponse(string mime, string code, int length)
         {
+            string time = DateTime.UtcNow.ToLongDateString();
+
             StringBuilder builder = new StringBuilder();
-            return null;
+            builder.AppendFormat("HTTP/1.1 {0}\r\n", code);
+            builder.AppendFormat("Content-Type: {0}\r\n", mime);
+            builder.Append("Server: MyOwnWebServer\r\n");
+            builder.AppendFormat("Date: {0}\r\n", time);
+            builder.AppendFormat("Content-Length: {0}\r\n", length);
+            builder.Append("\r\n");
+
+            return builder.ToString();
         }
 
 

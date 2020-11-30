@@ -49,7 +49,7 @@ namespace MyOwnWebServer
 
         static public string[] GetTextResource(string path)
         {
-            string[] resource = new string[1024];
+            string[] resource;
 
             try
             {
