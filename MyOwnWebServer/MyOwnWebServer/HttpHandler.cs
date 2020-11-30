@@ -34,12 +34,12 @@ namespace MyOwnWebServer
 
         public const string version = "HTTP/1.1";
 
-        public static bool ValidateRequest(string data)
+        public static bool ValidateRequest(string data, out string resource)
         {
             if (data.StartsWith("GET"))
             {
                 // this means it is a GET request
-                if(data.EndsWith("HTTP/1.1\r\n"))
+                if(data.Contains("HTTP/1.1\r\n"))
                 {
                     string[] splitData = data.Split(' ');
                     string path = splitData[1];
@@ -47,33 +47,41 @@ namespace MyOwnWebServer
                     if (FileHandler.IsValidPath(path))
                     {
                         // is a valid header
+                        resource = path;
                         return true;
                     }
                     else
                     {
                         // is not a valid path
+                        resource = null;
                         return false;
                     }
                 }
                 else
                 {
                     // not a valid header if it does not have this
+                    resource = null;
                     return false;
                 }
             }
             else
             {
                 // we don't support post
+                resource = null;
                 return false;
             }
             
         }
 
+
+
         public static string BuildResponse()
         {
             StringBuilder builder = new StringBuilder();
-
+            return null;
         }
+
+
         public static byte[] Converter(string path)
         {
             byte[] bytes = new byte[4096];

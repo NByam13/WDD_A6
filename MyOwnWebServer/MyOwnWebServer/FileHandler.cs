@@ -45,5 +45,22 @@ namespace MyOwnWebServer
 
             return true; // if the path doesn't throw any exceptions then it is a valid path.
         }
+
+
+        static public string[] GetResource(string path)
+        {
+            string[] resource = new string[1024];
+
+            try
+            {
+                resource = File.ReadAllLines(path);
+            }
+            catch(Exception e)
+            {
+                Logger.Log(e.Message);
+                return null;
+            }
+            return resource;
+        }
     }
 }

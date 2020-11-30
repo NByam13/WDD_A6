@@ -119,20 +119,29 @@ namespace MyOwnWebServer
             // Get a stream object for reading and writing
             NetworkStream stream = client.GetStream();
             string data = Receive(stream);
+            Logger.Log(Logger.FormatForLog(data, "RECEIVE"));
             bool validation;
+            string path;
 
-            validation = HttpHandler.ValidateRequest(data);
+            validation = HttpHandler.ValidateRequest(data, out path);
 
-            //if(validation==true)
-            //{
-                ////send msg back with what they wanted
-            //}
-            //else
-            //{
-            //    //do nothing or say invalid?
-            //}
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-            //do something with input recieved by user
+            if(validation)
+            {
+                string[] resource = new string[1024];
+                resource = FileHandler.GetResource(path);
+                if(resource == null)
+                {
+                    // Pick the correct code to send back
+                }
+                else
+                {
+                    // convert resource to appropriate byte form and get correct code.
+                }
+            }
+            else
+            {
+                // pick appropriate error code
+            }
 
             // Shutdown and end connection
             client.Close();
@@ -149,6 +158,12 @@ namespace MyOwnWebServer
             data += Encoding.ASCII.GetString(bytes, 0, numBytes);
             stream.Flush();
             return data;
+        }
+
+
+        public void Send(NetworkStream stream, byte[] msg)
+        {
+
         }
 
 
