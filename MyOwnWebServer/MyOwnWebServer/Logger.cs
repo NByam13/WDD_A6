@@ -11,13 +11,18 @@ namespace MyOwnWebServer
     static public class Logger
     {
         private const string path = "./MyOwnWebServer.log";
+        private static int startFlag = 1;
 
         static public void Log(string msg)
         {
             string timeStamp = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString();
             string logMsg = timeStamp + " " + msg + "\n";
 
-            FileHandler.CreateFile(path);
+            if(startFlag == 1)
+            {
+                FileHandler.CreateFile(path);
+                startFlag = 0;
+            }
             try
             {
                 File.AppendAllText(path, logMsg);

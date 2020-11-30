@@ -71,7 +71,7 @@ namespace MyOwnWebServer
 
         public static byte[] BuildResponse(string mime, string code, int length)
         {
-            string time = DateTime.UtcNow.ToLongDateString();
+            string time = DateTime.UtcNow.ToLongDateString() + " " + DateTime.UtcNow.ToLongTimeString();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendFormat("HTTP/1.1 {0}\r\n", code);
@@ -98,7 +98,7 @@ namespace MyOwnWebServer
 
             }
             //if .jpg .other image formats
-            else if((path.EndsWith(".jpeg"))|| (path.EndsWith(".jpg"))|| (path.EndsWith(".png")))
+            else if((path.EndsWith(".jpeg"))|| (path.EndsWith(".jpg"))|| (path.ToLower().EndsWith(".png")))
             {
                 Bitmap imageBM = new Bitmap(path);
                 ImageConverter imageC = new ImageConverter();

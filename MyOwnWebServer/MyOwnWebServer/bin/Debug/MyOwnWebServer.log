@@ -1,1 +1,5 @@
-2020-11-29 7:16:59 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
+2020-11-30 3:29:02 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
+2020-11-30 3:29:07 PM [UNKNOWN]: RECEIVE - GET test.txt HTTP/1.1
+HOST: localhost
+
+

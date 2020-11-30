@@ -124,8 +124,9 @@ namespace MyOwnWebServer
             Logger.Log(Logger.FormatForLog(data, "RECEIVE"));
             bool validation;
             string path;
-            string mime;
-            byte[] returnMsg = new byte[1000096];
+            string mime = "";
+            byte[] content = new byte[1000000];
+            byte[] responseHeader = new byte[1024];
             
             validation = HttpHandler.ValidateRequest(data, out path, out Codes.currentCode);
 
@@ -144,9 +145,15 @@ namespace MyOwnWebServer
             else
             {
                 // pick appropriate error code
+                mime = "text/html";
             }
-            returnMsg = HttpHandler.BuildResponse(mime, Codes.currentCode, )
-            Send(stream, returnMsg);
+            content = HttpHandler.Converter(DataPath);
+            responseHeader = HttpHandler.BuildResponse(mime, Codes.currentCode, content.Length);
+            byte[] combinedMsg = new byte[content.Length + responseHeader.Length];
+            System.Buffer.BlockCopy(responseHeader, 0, combinedMsg, 0, responseHeader.Length);
+            System.Buffer.BlockCopy(content, 0, combinedMsg, responseHeader.Length, content.Length);
+
+            Send(stream, combinedMsg);
             // Shutdown and end connection
             stream.Close();
             client.Close();
