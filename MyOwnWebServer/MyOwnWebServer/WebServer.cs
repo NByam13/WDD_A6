@@ -154,7 +154,7 @@ namespace MyOwnWebServer
         public string Receive(NetworkStream stream)
         {
             // Buffer for reading data
-            byte[] bytes = new byte[1000096];
+            byte[] bytes = new byte[4096];
             int numBytes = 0;
             string data = "";
             try

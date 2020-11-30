@@ -27,12 +27,7 @@ namespace MyOwnWebServer
 
             public string currentCode;
         }
-
-        public struct ContentType
-        {
-            const string Html = "text/html";
-            const string Image = "";
-        }
+        
 
         public const string version = "HTTP/1.1";
 
@@ -43,9 +38,8 @@ namespace MyOwnWebServer
                 resource = null;
                 return false;
             }
-            if (data.StartsWith("GET"))
+            if (data.StartsWith("GET")) // this means it is a GET request
             {
-                // this means it is a GET request
                 if(data.Contains("HTTP/1.1\r\n"))
                 {
                     string[] splitData = data.Split(' ');
