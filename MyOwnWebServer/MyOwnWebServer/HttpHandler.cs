@@ -113,7 +113,11 @@ namespace MyOwnWebServer
             //if html
             else if (path.EndsWith(".html"))
             {
-
+                string[] httpString = FileHandler.GetTextResource(path);
+                for(int i=0; i < httpString.Length;i++)
+                {
+                    bytes[i] = byte.Parse(httpString[i]);
+                }
             }
             //return the value in byte array
             return bytes;
