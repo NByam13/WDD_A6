@@ -1,23 +1,14 @@
-2020-12-01 4:15:33 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
-2020-12-01 4:15:39 PM [UNKNOWN]: RECEIVE - GET /nothing.txt HTTP/1.1
-Host: 192.168.2.50:23000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Upgrade-Insecure-Requests: 1
+2020-12-01 4:42:47 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
+2020-12-01 4:43:53 PM [UNKNOWN]: RECEIVE - GET /returnHtml  /400.html HTTP/1.1
+HOST: localhost
 
 
-2020-12-01 4:15:39 PM Could not find file 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\nothing.txt'.
-2020-12-01 4:15:39 PM [UNKNOWN]: RECEIVE - GET /favicon.ico HTTP/1.1
-Host: 192.168.2.50:23000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
-Accept: image/webp,*/*
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Referer: http://192.168.2.50:23000/nothing.txt
+2020-12-01 4:43:53 PM Access to the path 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\returnHtml' is denied.
+2020-12-01 4:45:27 PM [UNKNOWN]: RECEIVE - GET HTTP/1.1
+HOST: localhost
 
 
-2020-12-01 4:15:39 PM Could not find file 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\favicon.ico'.
+2020-12-01 4:45:36 PM [UNKNOWN]: RECEIVE - GET HTTP/1.1
+HOST: localhost
+
+

@@ -144,12 +144,12 @@ namespace MyOwnWebServer
                 }
                 else
                 {
-                    if(tmpCode != "")
+                    if(tmpCode != "") // this happens if the user tries to request the event log.
                     {
                         Codes.currentCode = tmpCode;
                         DataPath = Root + "returnHtml/403.html";
                     }
-                    else
+                    else // this happens if the validate path method can't find the file requested
                     {
                         Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
                         DataPath = Root + "returnHtml/404.html";
@@ -166,10 +166,9 @@ namespace MyOwnWebServer
             content = HttpHandler.Converter(DataPath);
             if(content == Encoding.ASCII.GetBytes("")) // this will occur when the browser requests favicon.ico
             {
-                Codes.currentCode = HttpHandler.HTTPCodes.NoContent;
                 mime = "text/plain";
             }
-            else if(content == null)
+            else if(content == null) // this happens when a file type is asked for that we don't support
             {
 
             }

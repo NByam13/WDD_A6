@@ -60,6 +60,12 @@ namespace MyOwnWebServer
                         resource = null;
                         return true;
                     }
+                    else if(!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
+                    {
+                        resource = "returnHtml/400.html";
+                        code = HTTPCodes.BadRequest;
+                        return false;
+                    }
 
                     resource = path;
                     code = HTTPCodes.OK;
@@ -76,8 +82,8 @@ namespace MyOwnWebServer
             else
             {
                 // we don't support post
-                resource = "returnHtml/405.html";
-                code = HTTPCodes.NotAllowed;
+                resource = "returnHtml/501.html";
+                code = HTTPCodes.NotImplemented;
                 return false;
             }
             
