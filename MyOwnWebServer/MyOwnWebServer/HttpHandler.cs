@@ -51,23 +51,24 @@ namespace MyOwnWebServer
                 if(data.Contains("HTTP/1.1\r\n"))
                 {
                     // splits data based on where it finds a space
-                    string[] splitData = data.Split(' ');
-                    string path = splitData[1];
+                    int pathStart = data.IndexOf(' ') + 1;
+                    int pathEnd = data.IndexOf("HTTP/1.1") - 1;
+                    string path = data.Substring(pathStart, pathEnd - pathStart);
                     //if the path starts with /
                     if(path.StartsWith("/"))
                     {
-                        //replace it with a blank line...
-                        path = path.Replace('/', ' ');
-                        //and trim the path
+                        //trim the path
                         path = path.Trim();
+                        // delete the preceeding slash
+                        path = path.Remove(0, 1);
                     }
                     //if the path starts with \\
                     else if(path.StartsWith("\\"))
                     {
-                        //replace it with a blank line...
-                        path = path.Replace('\\', ' ');
-                        //and trim the path
+                        //trim the path
                         path = path.Trim();
+                        //replace it with a blank line...
+                        path = path.Remove(0, 1);
                     }
                     //if the path contains favicon
                     else if(path.Contains("favicon.ico"))
@@ -79,14 +80,15 @@ namespace MyOwnWebServer
                         //return true
                         return true;
                     }
-                    //make the modified path the resource
-                    else if(!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
+
+                    // Check to see if the uri for the resource is a valid uri
+                    if(!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
                     {
                         resource = "returnHtml/400.html";
                         code = HTTPCodes.BadRequest;
                         return false;
                     }
-
+                    //make the modified path the resource
                     resource = path;
                     //return the OK error code to tell the logger everything is fine
                     code = HTTPCodes.OK;
