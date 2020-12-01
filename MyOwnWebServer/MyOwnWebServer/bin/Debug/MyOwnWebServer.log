@@ -1,5 +1,125 @@
-2020-12-01 5:12:38 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
-2020-12-01 5:12:43 PM [UNKNOWN]: RECEIVE - GET /returnHtml  /400.html HTTP/1.1
-HOST: localhost
+2020-12-01 5:25:20 PM [SERVER STARTED]: -webIP=192.168.2.50 -webPort=23000 -webRoot=./ 
+2020-12-01 5:25:25 PM [UNKNOWN]: RECEIVE - 
+2020-12-01 5:25:30 PM [UNKNOWN]: RECEIVE - 
+2020-12-01 5:25:34 PM [UNKNOWN]: RECEIVE - 
+2020-12-01 5:25:44 PM [UNKNOWN]: RECEIVE - 
+2020-12-01 5:27:15 PM [UNKNOWN]: RECEIVE - GET / HTTP/1.1
+Host: 192.168.2.50:23000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
 
 
+2020-12-01 5:27:18 PM Could not find a part of the path 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\'.
+2020-12-01 5:27:26 PM [UNKNOWN]: RECEIVE - GET / HTTP/1.1
+Host: 192.168.2.50:23000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+
+
+2020-12-01 5:27:26 PM Could not find a part of the path 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\'.
+2020-12-01 5:28:11 PM [UNKNOWN]: RECEIVE - GET /register.html HTTP/1.1
+Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-CA,en-US;q=0.7,en;q=0.3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Accept-Encoding: gzip, deflate
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:28:11 PM [UNKNOWN]: RECEIVE - GET /favicon.ico HTTP/1.1
+Accept: */*
+UA-CPU: AMD64
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:28:11 PM Could not find a part of the path 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\'.
+2020-12-01 5:28:41 PM [UNKNOWN]: RECEIVE - GET /myOwnWebServer.log HTTP/1.1
+Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-CA,en-US;q=0.7,en;q=0.3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Accept-Encoding: gzip, deflate
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:28:50 PM [UNKNOWN]: RECEIVE - GET /test.txt HTTP/1.1
+Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-CA,en-US;q=0.7,en;q=0.3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Accept-Encoding: gzip, deflate
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:28:50 PM [UNKNOWN]: RECEIVE - GET /favicon.ico HTTP/1.1
+Accept: */*
+UA-CPU: AMD64
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:28:50 PM Could not find a part of the path 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\'.
+2020-12-01 5:28:56 PM [UNKNOWN]: RECEIVE - GET /meme.png HTTP/1.1
+Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-CA,en-US;q=0.7,en;q=0.3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Accept-Encoding: gzip, deflate
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:29:04 PM [UNKNOWN]: RECEIVE - GET /hello.txt HTTP/1.1
+Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-CA,en-US;q=0.7,en;q=0.3
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; NMTE; rv:11.0) like Gecko
+Accept-Encoding: gzip, deflate
+Host: 192.168.2.50:23000
+Connection: Keep-Alive
+
+
+2020-12-01 5:29:04 PM Could not find file 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\hello.txt'.
+2020-12-01 5:29:41 PM [UNKNOWN]: RECEIVE - GET /hello.txt HTTP/1.1
+Host: 192.168.2.50:23000
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+
+
+2020-12-01 5:29:41 PM Could not find file 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\hello.txt'.
+2020-12-01 5:29:56 PM [UNKNOWN]: RECEIVE - GET /register.html HTTP/1.1
+Host: 192.168.2.50:23000
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+
+
+2020-12-01 5:30:11 PM [UNKNOWN]: RECEIVE - GET /returnHtml/501.html HTTP/1.1
+Host: 192.168.2.50:23000
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+
+
+2020-12-01 5:30:11 PM Could not find file 'C:\Users\Nick_\source\repos\WDD_A6\MyOwnWebServer\MyOwnWebServer\bin\Debug\returnHtml\501.html'.

@@ -36,7 +36,7 @@ namespace MyOwnWebServer
         public static bool ValidateRequest(string data, out string resource, out string code)
         {
             //if the data is empty
-            if(data == null)
+            if(data == "")
             {
                 //go to the 400 error code
                 resource = "returnHtml/400.html";
@@ -50,10 +50,19 @@ namespace MyOwnWebServer
                 //if it contains HTTP/1.1
                 if(data.Contains("HTTP/1.1\r\n"))
                 {
-                    // splits data based on where it finds a space
+                    // splits data based on the position of the path in the header.
                     int pathStart = data.IndexOf(' ') + 1;
                     int pathEnd = data.IndexOf("HTTP/1.1") - 1;
                     string path = data.Substring(pathStart, pathEnd - pathStart);
+
+                    // This happens if coffee is requested from the server, we don't serve coffee, only tea... Sorry Sean.
+                    if(path.ToLower().Contains("coffee"))
+                    {
+                        code = HTTPCodes.TeaPot;
+                        resource = "returnHtml/418.html";
+                        return false;
+                    }
+
                     //if the path starts with /
                     if(path.StartsWith("/"))
                     {
@@ -70,8 +79,9 @@ namespace MyOwnWebServer
                         //replace it with a blank line...
                         path = path.Remove(0, 1);
                     }
+
                     //if the path contains favicon
-                    else if(path.Contains("favicon.ico"))
+                    if(path.Contains("favicon.ico"))
                     {
                         //tell the program that theres no content
                         code = HTTPCodes.NoContent;
