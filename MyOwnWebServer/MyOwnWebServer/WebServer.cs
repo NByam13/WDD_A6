@@ -138,22 +138,42 @@ namespace MyOwnWebServer
 
             if (validation)
             {
-                if(FileHandler.IsValidPath(DataPath))
+                if(FileHandler.IsValidPath(DataPath, out string tmpCode))
                 {
                     mime = MimeMapping.GetMimeMapping(DataPath);
                 }
                 else
                 {
-                    Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
-                    DataPath = Root + "returnHtml/404.html";
+                    if(tmpCode != "")
+                    {
+                        Codes.currentCode = tmpCode;
+                        DataPath = Root + "returnHtml/403.html";
+                    }
+                    else
+                    {
+                        Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
+                        DataPath = Root + "returnHtml/404.html";
+                    }
+                    
+                    mime = MimeMapping.GetMimeMapping(DataPath);
                 }
             }
             else
             {
-                // pick appropriate error code
+                // error code will be set in validator, so just get the mapping
                 mime = MimeMapping.GetMimeMapping(DataPath);
             }
             content = HttpHandler.Converter(DataPath);
+            if(content == Encoding.ASCII.GetBytes("")) // this will occur when the browser requests favicon.ico
+            {
+                Codes.currentCode = HttpHandler.HTTPCodes.NoContent;
+                mime = "text/plain";
+            }
+            else if(content == null)
+            {
+
+            }
+
             responseHeader = HttpHandler.BuildResponse(mime, Codes.currentCode, content.Length);
             byte[] combinedMsg = new byte[content.Length + responseHeader.Length];
             System.Buffer.BlockCopy(responseHeader, 0, combinedMsg, 0, responseHeader.Length);

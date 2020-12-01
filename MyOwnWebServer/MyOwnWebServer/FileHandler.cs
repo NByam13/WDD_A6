@@ -33,15 +33,17 @@ namespace MyOwnWebServer
             }
         }
 
-        static public bool IsValidPath(string path)
+        static public bool IsValidPath(string path, out string code)
         {
             //if they ask for a log
             if(path.Contains(".log")) // The user is not allowed to request the log file from the server
             {
                 //don't let them use the log
+                code = HttpHandler.HTTPCodes.Forbidden;
                 return false;
             }
 
+            code = "";
             try // this will basically check to see if the path is valid, and is easier than creating a regex for the path.
             {
                 if(path.EndsWith(".txt") || path.EndsWith(".html"))
