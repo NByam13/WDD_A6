@@ -138,6 +138,8 @@ namespace MyOwnWebServer
             builder.AppendFormat("Date: {0}\r\n", time);
             builder.AppendFormat("Content-Length: {0}\r\n", length);
             builder.Append("\r\n");
+
+            Logger.Log(Logger.FormatForLog(builder.ToString(), "RESPONSE"));
             //return the header
             return Encoding.ASCII.GetBytes(builder.ToString());
         }

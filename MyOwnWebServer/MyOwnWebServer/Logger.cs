@@ -92,7 +92,21 @@ namespace MyOwnWebServer
             else if (status == "RESPONSE")
             {
                 formattedMsg = "[RESPONSE]: ";
-                // #### Need to look at http header content ####
+                if (msg.Contains("200") || msg.Contains("204")) // if the request was processed without error
+                {
+                    int start = msg.IndexOf('\n') + 1;
+                    string tmp = msg.Substring(start);
+                    tmp = tmp.Replace('\r', ' ');
+                    tmp = tmp.Replace('\n', ' ');
+                    msg = tmp.Trim();
+                }
+                else // if some kind of error code is given from the client's request
+                {
+                    int codeStart = msg.IndexOf(' ') + 1; // find index of status code beginning
+                    int codeEnd = msg.IndexOf("/r/n") - 1; // find status code end
+                    msg = msg.Substring(codeStart, codeEnd - codeStart); // extract the status code
+                }
+                formattedMsg += msg;
             }
             else if(status == "EXCEPTION")
             {
