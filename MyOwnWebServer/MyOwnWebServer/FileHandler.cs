@@ -13,23 +13,32 @@ namespace MyOwnWebServer
     {
         static public void CreateFile(string path) // only really used for the logger
         {
+            //if the file doesn't exist
             if(!File.Exists(path))
             {
+                //create a new file at the location
                 var stream = File.Create(path);
+                //close the file
                 stream.Close();
             }
+            //if it does exist
             else
             {
+                //delete the file
                 File.Delete(path);
+                //create the file
                 var stream = File.Create(path);
+                //close the file
                 stream.Close();
             }
         }
 
         static public bool IsValidPath(string path, out string code)
         {
+            //if they ask for a log
             if(path.Contains(".log")) // The user is not allowed to request the log file from the server
             {
+                //don't let them use the log
                 code = HttpHandler.HTTPCodes.Forbidden;
                 return false;
             }

@@ -10,8 +10,10 @@ namespace MyOwnWebServer
 {
     static public class HttpHandler
     {
+
         public struct HTTPCodes
         {
+            //holds all httpcodes
             public const string OK = "200 OK";
             public const string NoContent = "204 No Content";
             public const string BadRequest = "400 Bad Request";
@@ -24,42 +26,60 @@ namespace MyOwnWebServer
             public const string NotImplemented = "501 Not Implemented";
             public const string VersionErr = "505 HTTP Version Not Supported";
 
+            //returns code required by program
             public string currentCode;
         }
         
-
+        //holds the version
         public const string version = "HTTP/1.1";
 
         public static bool ValidateRequest(string data, out string resource, out string code)
         {
+            //if the data is empty
             if(data == null)
             {
+                //go to the 400 error code
                 resource = "returnHtml/400.html";
+                //store error code in value
                 code = HTTPCodes.BadRequest;
+                //return false to say there was a bad request
                 return false;
             }
             if (data.StartsWith("GET")) // this means it is a GET request
             {
+                //if it contains HTTP/1.1
                 if(data.Contains("HTTP/1.1\r\n"))
                 {
+                    // splits data based on where it finds a space
                     string[] splitData = data.Split(' ');
                     string path = splitData[1];
+                    //if the path starts with /
                     if(path.StartsWith("/"))
                     {
+                        //replace it with a blank line...
                         path = path.Replace('/', ' ');
+                        //and trim the path
                         path = path.Trim();
                     }
+                    //if the path starts with \\
                     else if(path.StartsWith("\\"))
                     {
+                        //replace it with a blank line...
                         path = path.Replace('\\', ' ');
+                        //and trim the path
                         path = path.Trim();
                     }
+                    //if the path contains favicon
                     else if(path.Contains("favicon.ico"))
                     {
+                        //tell the program that theres no content
                         code = HTTPCodes.NoContent;
+                        //empty the resource
                         resource = null;
+                        //return true
                         return true;
                     }
+                    //make the modified path the resource
                     else if(!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
                     {
                         resource = "returnHtml/400.html";
@@ -68,14 +88,18 @@ namespace MyOwnWebServer
                     }
 
                     resource = path;
+                    //return the OK error code to tell the logger everything is fine
                     code = HTTPCodes.OK;
+                    //return true
                     return true;
                 }
                 else
                 {
                     // not a valid header if it does not have this
                     resource = "returnHtml/505.html";
+                    //get the version error (error 505)
                     code = HTTPCodes.VersionErr;
+                    //return false to say there was an issue
                     return false;
                 }
             }
@@ -93,8 +117,9 @@ namespace MyOwnWebServer
 
         public static byte[] BuildResponse(string mime, string code, int length)
         {
+            //tell the current date
             string time = DateTime.UtcNow.ToLongDateString() + " " + DateTime.UtcNow.ToLongTimeString();
-
+            //Create the http header
             StringBuilder builder = new StringBuilder();
             builder.AppendFormat("HTTP/1.1 {0}\r\n", code);
             builder.AppendFormat("Content-Type: {0}\r\n", mime);
@@ -102,7 +127,7 @@ namespace MyOwnWebServer
             builder.AppendFormat("Date: {0}\r\n", time);
             builder.AppendFormat("Content-Length: {0}\r\n", length);
             builder.Append("\r\n");
-
+            //return the header
             return Encoding.ASCII.GetBytes(builder.ToString());
         }
 
@@ -132,6 +157,7 @@ namespace MyOwnWebServer
                 string content = "";
                 bytes = Encoding.ASCII.GetBytes(content);
             }
+            //if its none of the following files send an empty byte array
             else
             {
                 bytes = null;
