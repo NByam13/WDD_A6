@@ -58,19 +58,6 @@ namespace MyOwnWebServer
                     }
                 }
             }
-            else if(status == "RECEIVE")
-            {
-                formattedMsg = "[RECEIVED]: ";
-                foreach(string msg in msgs)
-                {
-                    formattedMsg += msg + " ";
-                }
-            }
-            else if(status == "RESPONSE")
-            {
-                formattedMsg = "[RESPONSE]: ";
-                // #### Need to look at http header content ####
-            }
             else
             {
                 formattedMsg = FormatForLog("Unknown Operation", status);
@@ -82,10 +69,30 @@ namespace MyOwnWebServer
         static public string FormatForLog(string msg, string status)
         {
             string formattedMsg = "";
-            if (status == "STOP")
+            if (status == "STOP") // if the server is given a stop request. This is unimplemented.
             {
                 formattedMsg = "[SERVER STOPPED]: ";
                 formattedMsg += msg;
+            }
+            else if (status == "RECEIVE")
+            {
+                formattedMsg = "[RECEIVED]: ";
+                try
+                {
+                    int index = msg.IndexOf("HTTP");
+                    msg = msg.Substring(0, index - 1);
+                }
+                catch(Exception e) // if a weird response comes in where the verb and path can;t be parsed, format an exception log.
+                {
+                    string tmp = FormatForLog("Bad Request Received: ", "EXCEPTION");
+                    msg = tmp + msg;
+                }
+                formattedMsg += msg;
+            }
+            else if (status == "RESPONSE")
+            {
+                formattedMsg = "[RESPONSE]: ";
+                // #### Need to look at http header content ####
             }
             else if(status == "EXCEPTION")
             {
