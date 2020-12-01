@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 
@@ -91,20 +90,12 @@ namespace MyOwnWebServer
             //if .gif
             if (path.EndsWith(".gif"))
             {
-                Bitmap gifBM = new Bitmap(path);
-                ImageConverter gifC = new ImageConverter();
-                Image specifiedGIF = gifBM;
-                bytes = (byte[])gifC.ConvertTo(specifiedGIF, typeof(byte[]));
-
+                bytes = File.ReadAllBytes(path);
             }
             //if .jpg .other image formats
             else if((path.EndsWith(".jpeg"))|| (path.EndsWith(".jpg"))|| (path.ToLower().EndsWith(".png")))
             {
-                Bitmap imageBM = new Bitmap(path);
-                ImageConverter imageC = new ImageConverter();
-                Image specifiedImage= imageBM;
-                bytes = (byte[])imageC.ConvertTo(specifiedImage, typeof(byte[]));
-
+                bytes = File.ReadAllBytes(path);
             }
             //if html or text
             else if (path.EndsWith(".html") || path.EndsWith(".txt"))
