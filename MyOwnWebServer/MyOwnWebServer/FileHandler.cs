@@ -37,7 +37,7 @@ namespace MyOwnWebServer
         {
             //if they ask for a log
             if(path.Contains(".log") || path.ToLower().Contains("returnhtml")) // The user is not allowed to request the log file from the server
-            {
+            {                                                                  // The user can't explicitly request error code htmls either
                 //don't let them use the log
                 code = HttpHandler.HTTPCodes.Forbidden;
                 return false;

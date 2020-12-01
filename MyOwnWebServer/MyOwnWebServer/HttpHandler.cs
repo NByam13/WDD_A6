@@ -21,7 +21,6 @@ namespace MyOwnWebServer
             public const string NotFound = "404 Not Found";
             public const string NotAllowed = "405 Method Not Allowed";
             public const string TeaPot = "418 I'm a Teapot";
-            public const string TooMany = "429 Too Many Requests";
             public const string ServerErr = "500 Internal Server Error";
             public const string NotImplemented = "501 Not Implemented";
             public const string VersionErr = "505 HTTP Version Not Supported";
