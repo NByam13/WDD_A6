@@ -154,16 +154,17 @@ namespace MyOwnWebServer
                 bytes = File.ReadAllBytes(path);
             }
             //if .jpg .other image formats
-            else if((path.EndsWith(".jpeg"))|| (path.EndsWith(".jpg"))|| (path.ToLower().EndsWith(".png")))
+            else if(path.EndsWith(".jpeg")|| path.EndsWith(".jpg")|| path.ToLower().EndsWith(".png") || path.EndsWith(".jfif") || path.EndsWith(".pjpeg") || path.EndsWith(".pjp"))
             {
                 bytes = File.ReadAllBytes(path);
             }
-            //if html or text
+            //if html or html related types or text
             else if (path.EndsWith(".html") || path.EndsWith(".txt") || path.EndsWith(".htm") || path.EndsWith(".shtml") || path.EndsWith(".xhtml"))
             {
                 string htmlString = FileHandler.GetTextResource(path);
                 bytes = Encoding.ASCII.GetBytes(htmlString);
             }
+            // if more html or server script type text files
             else if(path.EndsWith(".xht") || path.EndsWith(".mdoc") || path.EndsWith(".jsp") || path.EndsWith(".asp") || path.EndsWith("aspx") || path.EndsWith(".jshtm"))
             {
                 string text = FileHandler.GetTextResource(path);
