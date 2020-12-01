@@ -170,11 +170,16 @@ namespace MyOwnWebServer
             }
             else if(content == null) // this happens when a file type is asked for that we don't support
             {
-
+                Codes.currentCode = HttpHandler.HTTPCodes.ServerErr;
+                DataPath = Root + "returnHtml/500.html";
+                content = HttpHandler.Converter(DataPath);
             }
 
+            // build the response header.
             responseHeader = HttpHandler.BuildResponse(mime, Codes.currentCode, content.Length);
             byte[] combinedMsg = new byte[content.Length + responseHeader.Length];
+
+            // Stitch together the header and the response body.
             System.Buffer.BlockCopy(responseHeader, 0, combinedMsg, 0, responseHeader.Length);
             System.Buffer.BlockCopy(content, 0, combinedMsg, responseHeader.Length, content.Length);
 

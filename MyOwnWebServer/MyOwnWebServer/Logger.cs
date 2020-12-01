@@ -94,11 +94,11 @@ namespace MyOwnWebServer
                 formattedMsg = "[RESPONSE]: ";
                 if (msg.Contains("200") || msg.Contains("204")) // if the request was processed without error
                 {
-                    int start = msg.IndexOf('\n') + 1;
-                    string tmp = msg.Substring(start);
-                    tmp = tmp.Replace('\r', ' ');
-                    tmp = tmp.Replace('\n', ' ');
-                    msg = tmp.Trim();
+                    int start = msg.IndexOf('\n') + 1; // disregard first line, start at second line
+                    string tmp = msg.Substring(start); // grab every line after the first in a substring
+                    tmp = tmp.Replace('\r', ' '); // replace all occurences of \r
+                    tmp = tmp.Replace('\n', ' '); // replace all occurences of \n
+                    msg = tmp.Trim(); // trim whitespace from beginning and end.
                 }
                 else // if some kind of error code is given from the client's request
                 {

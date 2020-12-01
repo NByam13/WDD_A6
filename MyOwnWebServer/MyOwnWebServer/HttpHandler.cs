@@ -159,10 +159,15 @@ namespace MyOwnWebServer
                 bytes = File.ReadAllBytes(path);
             }
             //if html or text
-            else if (path.EndsWith(".html") || path.EndsWith(".txt"))
+            else if (path.EndsWith(".html") || path.EndsWith(".txt") || path.EndsWith(".htm") || path.EndsWith(".shtml") || path.EndsWith(".xhtml"))
             {
                 string htmlString = FileHandler.GetTextResource(path);
                 bytes = Encoding.ASCII.GetBytes(htmlString);
+            }
+            else if(path.EndsWith(".xht") || path.EndsWith(".mdoc") || path.EndsWith(".jsp") || path.EndsWith(".asp") || path.EndsWith("aspx") || path.EndsWith(".jshtm"))
+            {
+                string text = FileHandler.GetTextResource(path);
+                bytes = Encoding.ASCII.GetBytes(text);
             }
             // For when the browser sends a request for the tab icon
             else if(path.Contains("favicon.ico"))
