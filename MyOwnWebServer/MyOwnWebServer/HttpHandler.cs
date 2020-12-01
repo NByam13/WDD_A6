@@ -34,7 +34,7 @@ namespace MyOwnWebServer
         {
             if(data == null)
             {
-                resource = null;
+                resource = "returnHtml/400.html";
                 code = HTTPCodes.BadRequest;
                 return false;
             }
@@ -44,6 +44,23 @@ namespace MyOwnWebServer
                 {
                     string[] splitData = data.Split(' ');
                     string path = splitData[1];
+                    if(path.StartsWith("/"))
+                    {
+                        path = path.Replace('/', ' ');
+                        path = path.Trim();
+                    }
+                    else if(path.StartsWith("\\"))
+                    {
+                        path = path.Replace('\\', ' ');
+                        path = path.Trim();
+                    }
+                    else if(path.Contains("favicon.ico"))
+                    {
+                        code = HTTPCodes.NoContent;
+                        resource = null;
+                        return true;
+                    }
+
                     resource = path;
                     code = HTTPCodes.OK;
                     return true;
@@ -51,7 +68,7 @@ namespace MyOwnWebServer
                 else
                 {
                     // not a valid header if it does not have this
-                    resource = null;
+                    resource = "returnHtml/505.html";
                     code = HTTPCodes.VersionErr;
                     return false;
                 }
@@ -59,7 +76,7 @@ namespace MyOwnWebServer
             else
             {
                 // we don't support post
-                resource = null;
+                resource = "returnHtml/405.html";
                 code = HTTPCodes.NotAllowed;
                 return false;
             }
@@ -102,6 +119,12 @@ namespace MyOwnWebServer
             {
                 string htmlString = FileHandler.GetTextResource(path);
                 bytes = Encoding.ASCII.GetBytes(htmlString);
+            }
+            // For when the browser sends a request for the tab icon
+            else if(path.Contains("favicon.ico"))
+            {
+                string content = "";
+                bytes = Encoding.ASCII.GetBytes(content);
             }
             else
             {

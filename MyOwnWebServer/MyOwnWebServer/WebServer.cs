@@ -22,6 +22,7 @@ namespace MyOwnWebServer
 
         public bool run = true;
         public string DataPath { get; set; }
+        public string Root { get; set; }
         public int Port { get; set; }
         public IPAddress ServerIP { get; set; }
 
@@ -36,6 +37,10 @@ namespace MyOwnWebServer
         public WebServer(string[] args)
         {
             SetProperties(args);
+            if(!Root.EndsWith("/"))
+            {
+                Root = Root.Trim() + "/";
+            }
         }
 
 
@@ -129,10 +134,10 @@ namespace MyOwnWebServer
             byte[] responseHeader = new byte[1024];
             
             validation = HttpHandler.ValidateRequest(data, out path, out Codes.currentCode);
+            DataPath = Root + path;
 
-            if(validation)
+            if (validation)
             {
-                DataPath += path;
                 if(FileHandler.IsValidPath(DataPath))
                 {
                     mime = MimeMapping.GetMimeMapping(DataPath);
@@ -140,12 +145,13 @@ namespace MyOwnWebServer
                 else
                 {
                     Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
+                    DataPath = Root + "returnHtml/404.html";
                 }
             }
             else
             {
                 // pick appropriate error code
-                mime = "text/html";
+                mime = MimeMapping.GetMimeMapping(DataPath);
             }
             content = HttpHandler.Converter(DataPath);
             responseHeader = HttpHandler.BuildResponse(mime, Codes.currentCode, content.Length);
@@ -274,7 +280,7 @@ namespace MyOwnWebServer
                     }
                     else
                     {
-                        DataPath = args[i]; // if the value is neither an Int nor an IPAddress type, then it is the data path.
+                        Root = args[i]; // if the value is neither an Int nor an IPAddress type, then it is the data path.
                     }
                 }
             }

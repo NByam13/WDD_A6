@@ -35,15 +35,31 @@ namespace MyOwnWebServer
 
             try // this will basically check to see if the path is valid, and is easier than creating a regex for the path.
             {
-                Path.GetFullPath(path);
+                if(path.EndsWith(".txt") || path.EndsWith(".html"))
+                {
+                    string tmp = File.ReadAllText(path);
+                    if(tmp != "")
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                }
+                else
+                {
+                    byte[] tmp = File.ReadAllBytes(path);
+                    if(tmp != null)
+                    {
+                        return true;
+                    }
+                    else { return false; }
+                }
+                
             }
             catch(Exception e) // catch any exception that this this may throw, they're all related to path validity
             {
                 Logger.Log(e.Message);
                 return false;
             }
-
-            return true; // if the path doesn't throw any exceptions then it is a valid path.
         }
 
 
