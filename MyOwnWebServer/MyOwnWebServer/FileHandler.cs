@@ -46,28 +46,39 @@ namespace MyOwnWebServer
             code = "";
             try // this will basically check to see if the path is valid, and is easier than creating a regex for the path.
             {
+                //if the file is a txt or html
                 if(path.EndsWith(".txt") || path.EndsWith(".html"))
                 {
+                    //read the file
                     string tmp = File.ReadAllText(path);
+                    //if its not empty
                     if(tmp != "")
                     {
+                        //return true
                         return true;
                     }
+                    //if its empty return false
                     else { return false; }
                 }
+                //if its not one of them
                 else
                 {
+                    //send all the data to the tmp
                     byte[] tmp = File.ReadAllBytes(path);
+                    //if its not empty
                     if(tmp != null)
                     {
+                        //tell the program its a valid path
                         return true;
                     }
+                    //if its not valid, tell the program
                     else { return false; }
                 }
                 
             }
             catch(Exception e) // catch any exception that this this may throw, they're all related to path validity
             {
+                //send the logger the exception that was caught
                 Logger.Log(e.Message);
                 return false;
             }
@@ -76,17 +87,21 @@ namespace MyOwnWebServer
 
         static public string GetTextResource(string path)
         {
+            //declare variables
             string resource;
 
             try
             {
+                //read the file and get the information
                 resource = File.ReadAllText(path);
             }
-            catch(Exception e)
+            catch(Exception e)//if an error occurs
             {
+                //send it to the logger
                 Logger.Log(e.Message);
                 return null;
             }
+            //return the string
             return resource;
         }
     }
