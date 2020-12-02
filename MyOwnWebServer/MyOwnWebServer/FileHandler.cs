@@ -1,4 +1,11 @@
-﻿using System;
+﻿//*********************************************
+// File			 : FileHandler.cs
+// Project		 : WDD - A6 - WebServer
+// Programmer	 : Nick Byam, Nikola Ristic
+// Last Change   : 2020-12-01
+//*********************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +16,10 @@ using System.Security;
 
 namespace MyOwnWebServer
 {
+    //******************************************
+    // Name     : FileHandler
+    // Purpose  : A class tasked with all program execution related to reading and verifying files that are to be sent back to the client
+    //******************************************
     static public class FileHandler
     {
         static public void CreateFile(string path) // only really used for the logger
@@ -98,7 +109,7 @@ namespace MyOwnWebServer
             catch(Exception e)//if an error occurs
             {
                 //send it to the logger
-                Logger.Log(e.Message);
+                Logger.Log(Logger.FormatForLog(e.Message, "EXCEPTION"));
                 return null;
             }
             //return the string

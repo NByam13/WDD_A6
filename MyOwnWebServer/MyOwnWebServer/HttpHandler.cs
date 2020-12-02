@@ -1,4 +1,11 @@
-﻿using System;
+﻿//*********************************************
+// File			 : HttpHandler.cs
+// Project		 : WDD - A6 - WebServer
+// Programmer	 : Nick Byam, Nikola Ristic
+// Last Change   : 2020-12-01
+//*********************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +15,13 @@ using System.IO;
 
 namespace MyOwnWebServer
 {
+    //******************************************
+    // Name     : HttpHandler
+    // Purpose  : A class which is tasked with all program execution relating to the parsing and building of HTTP headers, as well as categorizing
+    //          : the status of the client server interaction. Status codes are defined in a struct called HTTPCodes.
+    //          : The Class also contains a method for converting the necessary Response body to a format able to be sent to a client over a
+    //          : Network stream
+    //******************************************
     static public class HttpHandler
     {
 

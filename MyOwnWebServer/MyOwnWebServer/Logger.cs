@@ -1,4 +1,11 @@
-﻿using System;
+﻿//*********************************************
+// File			 : Logger.cs
+// Project		 : WDD - A6 - WebServer
+// Programmer	 : Nick Byam, Nikola Ristic
+// Last Change   : 2020-12-01
+//*********************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +15,11 @@ using System.Diagnostics;
 
 namespace MyOwnWebServer
 {
+    //******************************************
+    // Name     : Logger
+    // Purpose  : A class which is tasked with writing relevant details to the server log file. The file is created if it doesn't
+    //          : exist, and there is a method that formats the log entry to adhere to project specifications.
+    //******************************************
     static public class Logger
     {
         private const string path = "./MyOwnWebServer.log";

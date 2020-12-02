@@ -1,4 +1,12 @@
-﻿using System;
+﻿//*********************************************
+// File			 : WebServer.cs
+// Project		 : WDD - A6 - WebServer
+// Programmer	 : Nick Byam, Nikola Ristic
+// Last Change   : 2020-12-01
+//*********************************************
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +18,12 @@ using System.Web;
 
 namespace MyOwnWebServer
 {
+    //******************************************
+    // Name     : WebServer
+    // Purpose  : The main class of the project, this class acts as the primary server, requiring 3 command line arguments to be started properly
+    //          : The server then waits in a loop until a pending connection is detected, in which it receives a request verifies it as a valid
+    //          : request and based on its findings, programatically builds an appropriate HTTP Response header as an answer to the client request.
+    //******************************************
     public class WebServer
     {
         //declare variables
