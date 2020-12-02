@@ -22,6 +22,13 @@ namespace MyOwnWebServer
     //******************************************
     static public class FileHandler
     {
+        /////////////////////////////////////////
+        // Method       : CreateFile
+        // Description  : Determines if the file is created, and if it is delete the file and 
+        //              : create a new log, and if not, just create a new file
+        // Parameters   : string path : The path given by the user
+        // Returns      : N/A
+        /////////////////////////////////////////
         static public void CreateFile(string path) // only really used for the logger
         {
             //if the file doesn't exist
@@ -44,6 +51,13 @@ namespace MyOwnWebServer
             }
         }
 
+        /////////////////////////////////////////
+        // Method       : IsValidPath
+        // Description  : Determines if the path that is asked for is a valid path for the program
+        // Parameters   : string path : The path given by the user
+        // Returns      : string resource: returns the all the text found in the file
+        //              : out string code:
+        /////////////////////////////////////////
         static public bool IsValidPath(string path, out string code)
         {
             //if they ask for a log
@@ -95,7 +109,12 @@ namespace MyOwnWebServer
             }
         }
 
-
+        /////////////////////////////////////////
+        // Method       : GetTextResource
+        // Description  : Gets the text from the file that on the path
+        // Parameters   : string path : The path to the file
+        // Returns      : string resource: returns the all the text found in the file
+        /////////////////////////////////////////
         static public string GetTextResource(string path)
         {
             //declare variables
