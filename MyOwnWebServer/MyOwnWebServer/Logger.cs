@@ -22,9 +22,16 @@ namespace MyOwnWebServer
     //******************************************
     static public class Logger
     {
+        //declare variables
         private const string path = "./MyOwnWebServer.log";
         private static int startFlag = 1;
 
+        /////////////////////////////////////////
+        // Method       : Log
+        // Description  : Sends the text to the specified log file, as well as connects the time to the message
+        // Parameters   : string msg : The messages that will be sent to the log  
+        // Returns      : N/A
+        /////////////////////////////////////////
         static public void Log(string msg)
         {
             string timeStamp = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString();
@@ -52,6 +59,14 @@ namespace MyOwnWebServer
             }
         }
 
+        /////////////////////////////////////////
+        // Method       : FormatForLog
+        // Description  : Formats the text that will be sent to the log
+        // Parameters   : string[] msgs : The messages that will be sent to the log 
+        //              : string status : tells the program why it was called
+        //              : in order to put the proper information to the log
+        // Returns      : string formattedMsg: The message that will be sent to the log
+        /////////////////////////////////////////
         static public string FormatForLog(string[] msgs, string status)
         {
             string formattedMsg = "";
@@ -78,6 +93,14 @@ namespace MyOwnWebServer
             return formattedMsg;
         }
 
+        /////////////////////////////////////////
+        // Method       : FormatForLog
+        // Description  : Formats the text that will be sent to the log
+        // Parameters   : string msg : The message that will be sent to the log 
+        //              : string status : tells the program why it was called
+        //              : in order to put the proper information to the log
+        // Returns      : string formattedMsg: The message that will be sent to the log
+        /////////////////////////////////////////
         static public string FormatForLog(string msg, string status)
         {
             string formattedMsg = "";

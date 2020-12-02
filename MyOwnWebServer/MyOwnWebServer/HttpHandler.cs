@@ -46,6 +46,17 @@ namespace MyOwnWebServer
         //holds the version
         public const string version = "HTTP/1.1";
 
+        /////////////////////////////////////////
+        // Method       : ValidateRequest
+        // Description  : Used to determine if the request was in a proper format, as well as if it was a GET/POST Request
+        //              : Sends error codes out if invalid
+        // Parameters   : string data : data thats being sent in by the user
+        // Returns      : bool true: If the program determines that the data and information is valid, return True
+        //              : bool false: If the program determines that the data and information is invalid, return false
+        //              : out string resource : holds the html that will be displayed if the input is invalid
+        //                                      holds null if valid
+        //              : out string code : holds the http code which is sent back to handleclient 
+        /////////////////////////////////////////
         public static bool ValidateRequest(string data, out string resource, out string code)
         {
             //if the data is empty
@@ -139,7 +150,15 @@ namespace MyOwnWebServer
         }
 
 
-
+        /////////////////////////////////////////
+        // Method       : BuildResponse
+        // Description  : Used to determine if the request was in a proper format, as well as if it was a GET/POST Request
+        //              : Sends error codes out if invalid
+        // Parameters   : string mime : Holds the type of content
+        //              : string code : Holds the html code of what occured
+        //              : int length  : Holds the length of the content
+        // Returns      : byte[] Encoding.ASCII.GetBytes(builder.ToString()): If the program determines that the data and information is valid, return True
+        /////////////////////////////////////////
         public static byte[] BuildResponse(string mime, string code, int length)
         {
             //tell the current date
