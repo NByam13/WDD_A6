@@ -12,6 +12,7 @@ namespace MyOwnWebServer
 {
     public class WebServer
     {
+        //declare variables
         private const int kReqArgNum = 3;
         private const int kMaxSplitArgs = 6;
         private const int kMaxUnkownArgs = 3;
