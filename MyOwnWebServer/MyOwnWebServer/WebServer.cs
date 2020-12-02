@@ -134,7 +134,14 @@ namespace MyOwnWebServer
             byte[] responseHeader = new byte[1024];
             
             validation = HttpHandler.ValidateRequest(data, out path, out Codes.currentCode);
-            DataPath = Root + path;
+            if(path.StartsWith("./"))
+            {
+                DataPath = path;
+            }
+            else
+            {
+                DataPath = Root + path;
+            }
 
             if (validation)
             {
@@ -147,12 +154,12 @@ namespace MyOwnWebServer
                     if(tmpCode != "") // this happens if the user tries to request the event log.
                     {
                         Codes.currentCode = tmpCode;
-                        DataPath = Root + "returnHtml/403.html";
+                        DataPath = "./returnHtml/403.html";
                     }
                     else // this happens if the validate path method can't find the file requested
                     {
                         Codes.currentCode = HttpHandler.HTTPCodes.NotFound;
-                        DataPath = Root + "returnHtml/404.html";
+                        DataPath = "./returnHtml/404.html";
                     }
                     
                     mime = MimeMapping.GetMimeMapping(DataPath);
@@ -171,7 +178,7 @@ namespace MyOwnWebServer
             else if(content == null) // this happens when a file type is asked for that we don't support
             {
                 Codes.currentCode = HttpHandler.HTTPCodes.ServerErr;
-                DataPath = Root + "returnHtml/500.html";
+                DataPath = "./returnHtml/500.html";
                 content = HttpHandler.Converter(DataPath);
             }
 

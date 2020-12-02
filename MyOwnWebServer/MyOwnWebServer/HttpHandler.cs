@@ -38,7 +38,7 @@ namespace MyOwnWebServer
             if(data == "")
             {
                 //go to the 400 error code
-                resource = "returnHtml/400.html";
+                resource = "./returnHtml/400.html";
                 //store error code in value
                 code = HTTPCodes.BadRequest;
                 //return false to say there was a bad request
@@ -58,7 +58,7 @@ namespace MyOwnWebServer
                     if(path.ToLower().Contains("coffee"))
                     {
                         code = HTTPCodes.TeaPot;
-                        resource = "returnHtml/418.html";
+                        resource = "./returnHtml/418.html";
                         return false;
                     }
 
@@ -93,7 +93,7 @@ namespace MyOwnWebServer
                     // Check to see if the uri for the resource is a valid uri
                     if(!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
                     {
-                        resource = "returnHtml/400.html";
+                        resource = "./returnHtml/400.html";
                         code = HTTPCodes.BadRequest;
                         return false;
                     }
@@ -107,7 +107,7 @@ namespace MyOwnWebServer
                 else
                 {
                     // not a valid header if it does not have this
-                    resource = "returnHtml/505.html";
+                    resource = "./returnHtml/505.html";
                     //get the version error (error 505)
                     code = HTTPCodes.VersionErr;
                     //return false to say there was an issue
@@ -117,7 +117,7 @@ namespace MyOwnWebServer
             else
             {
                 // we don't support post
-                resource = "returnHtml/501.html";
+                resource = "./returnHtml/501.html";
                 code = HTTPCodes.NotImplemented;
                 return false;
             }
