@@ -152,8 +152,7 @@ namespace MyOwnWebServer
 
         /////////////////////////////////////////
         // Method       : BuildResponse
-        // Description  : Used to determine if the request was in a proper format, as well as if it was a GET/POST Request
-        //              : Sends error codes out if invalid
+        // Description  : Creates the Response to the user, which will be sent back with the bytes
         // Parameters   : string mime : Holds the type of content
         //              : string code : Holds the html code of what occured
         //              : int length  : Holds the length of the content
@@ -177,7 +176,12 @@ namespace MyOwnWebServer
             return Encoding.ASCII.GetBytes(builder.ToString());
         }
 
-
+        /////////////////////////////////////////
+        // Method       : Converter
+        // Description  : Converts the file to bytes which will be sent back to the user
+        // Parameters   : string path: Holds where the file being used is
+        // Returns      : byte[] bytes: returns the information of the type of file that was sent in
+        /////////////////////////////////////////
         public static byte[] Converter(string path)
         {
             byte[] bytes = new byte[1000096];
