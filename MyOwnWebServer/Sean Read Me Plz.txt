@@ -1,0 +1,7 @@
+Hey Sean, When starting this server, please place the returnHtml folder into the same directory that will contain the MyOwnWebServer.exe
+
+These are just very simplistic html files that are returned when the server decides on a status code that is not 200 or 204.
+
+Cheers!
+
+Nick B and Nik R

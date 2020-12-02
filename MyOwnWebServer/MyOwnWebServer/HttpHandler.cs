@@ -34,6 +34,7 @@ namespace MyOwnWebServer
             public const string Forbidden = "403 Forbidden";
             public const string NotFound = "404 Not Found";
             public const string NotAllowed = "405 Method Not Allowed";
+            public const string Unsupported = "415 Unsupported Media Type";
             public const string TeaPot = "418 I'm a Teapot";
             public const string ServerErr = "500 Internal Server Error";
             public const string NotImplemented = "501 Not Implemented";
@@ -191,7 +192,7 @@ namespace MyOwnWebServer
                 bytes = File.ReadAllBytes(path);
             }
             //if .jpg .other image formats
-            else if(path.EndsWith(".jpeg")|| path.EndsWith(".jpg")|| path.ToLower().EndsWith(".png") || path.EndsWith(".jfif") || path.EndsWith(".pjpeg") || path.EndsWith(".pjp"))
+            else if(path.EndsWith(".jpeg")|| path.EndsWith(".jpg")|| path.ToLower().EndsWith(".png"))
             {
                 bytes = File.ReadAllBytes(path);
             }
@@ -200,12 +201,6 @@ namespace MyOwnWebServer
             {
                 string htmlString = FileHandler.GetTextResource(path);
                 bytes = Encoding.ASCII.GetBytes(htmlString);
-            }
-            // if more html or server script type text files
-            else if(path.EndsWith(".xht") || path.EndsWith(".mdoc") || path.EndsWith(".jsp") || path.EndsWith(".asp") || path.EndsWith("aspx") || path.EndsWith(".jshtm"))
-            {
-                string text = FileHandler.GetTextResource(path);
-                bytes = Encoding.ASCII.GetBytes(text);
             }
             // For when the browser sends a request for the tab icon
             else if(path.Contains("favicon.ico"))
