@@ -56,7 +56,8 @@ namespace MyOwnWebServer
         // Description  : Determines if the path that is asked for is a valid path for the program
         // Parameters   : string path : The path given by the user
         // Returns      : string resource: returns the all the text found in the file
-        //              : out string code:
+        //              : out string code: Used to set a 403 code if applicable, else it is an empty string that is handled
+        //              :                : in the calling location.
         /////////////////////////////////////////
         static public bool IsValidPath(string path, out string code)
         {

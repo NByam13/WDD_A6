@@ -34,10 +34,10 @@ namespace MyOwnWebServer
         /////////////////////////////////////////
         static public void Log(string msg)
         {
-            string timeStamp = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString();
+            string timeStamp = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")).ToString(); // time stamp the log message using eastern standard time.
             string logMsg = timeStamp + " " + msg + "\n";
 
-            if(startFlag == 1)
+            if(startFlag == 1) // This is used to stop the Log from overwriting itself, so a new log file is only created on server start.
             {
                 FileHandler.CreateFile(path);
                 startFlag = 0;
@@ -46,7 +46,7 @@ namespace MyOwnWebServer
             {
                 File.AppendAllText(path, logMsg);
             }
-            catch(Exception e)
+            catch(Exception e) // if there is a write error then the error will be written to the Event log instead of the text log.
             {
                 EventLog eventlog = new EventLog();
                 if(!EventLog.SourceExists("WebServerEventSource"))
@@ -70,10 +70,10 @@ namespace MyOwnWebServer
         static public string FormatForLog(string[] msgs, string status)
         {
             string formattedMsg = "";
-            if(status == "START")
-            {
+            if(status == "START") // This overloaded format method only handles the start command, because it has a list of cmd line arguments
+            {                     // that must be recorded
                 formattedMsg = "[SERVER STARTED]: ";
-                foreach(string msg in msgs)
+                foreach(string msg in msgs) // list commands in order they were given
                 {
                     if(msg.StartsWith("-"))
                     {
@@ -85,8 +85,8 @@ namespace MyOwnWebServer
                     }
                 }
             }
-            else
-            {
+            else // if a list is passed in but the status is not start, then the other format method will format a log message for the unknown
+            {    // occurence.
                 formattedMsg = FormatForLog("Unknown Operation", status);
             }
 
@@ -109,12 +109,12 @@ namespace MyOwnWebServer
                 formattedMsg = "[SERVER STOPPED]: ";
                 formattedMsg += msg;
             }
-            else if (status == "RECEIVE")
+            else if (status == "RECEIVE") // If the reason for the log is that data was received
             {
                 formattedMsg = "[RECEIVED]: ";
                 try
                 {
-                    int index = msg.IndexOf("HTTP");
+                    int index = msg.IndexOf("HTTP"); // we only want the verb and the resource to get
                     msg = msg.Substring(0, index - 1);
                 }
                 catch(Exception e) // if a weird response comes in where the verb and path can't be parsed, format an exception log.
@@ -124,7 +124,7 @@ namespace MyOwnWebServer
                 }
                 formattedMsg += msg;
             }
-            else if (status == "RESPONSE")
+            else if (status == "RESPONSE") // if the reason for the log is that a response has been formed
             {
                 formattedMsg = "[RESPONSE]: ";
                 if (msg.Contains("200") || msg.Contains("204")) // if the request was processed without error
@@ -151,12 +151,12 @@ namespace MyOwnWebServer
                 }
                 formattedMsg += msg;
             }
-            else if(status == "EXCEPTION")
+            else if(status == "EXCEPTION") // if the reason for the log is to record an exception.
             {
                 formattedMsg = "[EXCEPTION]: ";
                 formattedMsg += msg;
             }
-            else
+            else // if something strange happens, this log message is sent.
             {
                 formattedMsg = "[UNKNOWN]: ";
                 formattedMsg += status + " - ";
