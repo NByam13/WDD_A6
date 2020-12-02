@@ -68,7 +68,8 @@ namespace MyOwnWebServer
                 return false;
             }
 
-            code = "";
+            // this satisfies the use of out that was added to handle a specific 403 Forbidden status condition
+            code = ""; // at the calling location there is a condition block to check if a code was actually given.
             try // this will basically check to see if the path is valid, and is easier than creating a regex for the path.
             {
                 //if the file is a txt or html
