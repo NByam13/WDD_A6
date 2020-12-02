@@ -79,7 +79,7 @@ namespace MyOwnWebServer
             catch(Exception e) // catch any exception that this this may throw, they're all related to path validity
             {
                 //send the logger the exception that was caught
-                Logger.Log(e.Message);
+                Logger.Log(Logger.FormatForLog(e.Message, "EXCEPTION"));
                 return false;
             }
         }

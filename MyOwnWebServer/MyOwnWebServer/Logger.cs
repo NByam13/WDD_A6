@@ -82,7 +82,7 @@ namespace MyOwnWebServer
                     int index = msg.IndexOf("HTTP");
                     msg = msg.Substring(0, index - 1);
                 }
-                catch(Exception e) // if a weird response comes in where the verb and path can;t be parsed, format an exception log.
+                catch(Exception e) // if a weird response comes in where the verb and path can't be parsed, format an exception log.
                 {
                     string tmp = FormatForLog("Bad Request Received: ", "EXCEPTION");
                     msg = tmp + msg;
@@ -102,9 +102,17 @@ namespace MyOwnWebServer
                 }
                 else // if some kind of error code is given from the client's request
                 {
-                    int codeStart = msg.IndexOf(' ') + 1; // find index of status code beginning
-                    int codeEnd = msg.IndexOf("/r/n") - 1; // find status code end
-                    msg = msg.Substring(codeStart, codeEnd - codeStart); // extract the status code
+                    try
+                    {
+                        int codeStart = msg.IndexOf(' ') + 1; // find index of status code beginning
+                        int codeEnd = msg.IndexOf("\r\n"); // find status code end
+                        msg = msg.Substring(codeStart, codeEnd - codeStart); // extract the status code
+                    }
+                    catch(Exception e) // this will trigger if the data sent it empty
+                    {
+                        string tmp = FormatForLog("The data sent from the client was empty. Status code: ", "EXCEPTION");
+                        msg = tmp + HttpHandler.HTTPCodes.BadRequest;
+                    }
                 }
                 formattedMsg += msg;
             }
